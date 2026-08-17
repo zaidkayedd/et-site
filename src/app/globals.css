@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens (Tailwind v4 @theme)                                 */
+/*  Brand: #070E19 base · #011C25 deep · #686EDA indigo · #15F3AF mint */
+/*  Direction: Resend-style restraint — near-black, hairlines, space.  */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-base: #070e19;
+  --color-deep: #04060d;
+  --color-ink: #011c25;
+
+  --color-indigo: #686eda;
+  --color-indigo-soft: #8a8fe8;
+  --color-indigo-dim: #3b3f7a;
+
+  --color-mint: #15f3af;
+  --color-mint-soft: #6ff7cf;
+  --color-mint-dim: #0f6f54;
+
+  --color-surface-1: #0b1421;
+  --color-surface-2: #0e1a2c;
+  --color-surface-3: #12213a;
+
+  --color-hair: rgba(255, 255, 255, 0.08);
+  --color-hairbright: rgba(255, 255, 255, 0.16);
+
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display-xl: clamp(2.6rem, 5.4vw, 4.6rem);
+  --text-display-lg: clamp(2rem, 3.6vw, 3.1rem);
+  --text-display-md: clamp(1.55rem, 2.4vw, 2.15rem);
+
+  --radius-xl: 0.9rem;
+  --radius-2xl: 1.15rem;
+
+  --animate-dash-flow: dash-flow 22s linear infinite;
+
+  --shadow-card: 0 30px 80px -28px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 48px -14px rgba(104, 110, 218, 0.5);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-base);
+    color: #fff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* One restrained ambient glow (Resend-like: quiet, not busy) */
+    background-image: radial-gradient(
+      46rem 34rem at 50% -8%,
+      rgba(104, 110, 218, 0.14),
+      transparent 62%
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: rgba(104, 110, 218, 0.36);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-indigo-soft);
+    outline-offset: 2px;
+    border-radius: 5px;
+  }
+
+  /* Tabular figures for data (single-font mandate: Onest, tabular where numeric) */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "cv01" 1;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Utilities / components                                             */
+/* ------------------------------------------------------------------ */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) {
+  .container-x {
+    padding-inline: 2rem;
+  }
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-indigo-soft);
+}
+
+/* Section top hairline (Resend rhythm) */
+@utility section-line {
+  border-top: 1px solid var(--color-hair);
+}
+
+@utility card {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-hair);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+@utility card-hover {
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+.card-hover:hover {
+  border-color: var(--color-hairbright);
+  background: rgba(255, 255, 255, 0.035);
+  transform: translateY(-2px);
+}
+
+@utility text-muted {
+  color: rgba(255, 255, 255, 0.6);
+}
+@utility text-faint {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@utility gradient-text {
+  background: linear-gradient(96deg, #ffffff 0%, #b6b9f0 45%, #686eda 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fine hairline grid (used sparingly, behind hero) */
+@utility bg-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(60% 60% at 50% 30%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(60% 60% at 50% 30%, #000 30%, transparent 100%);
+}
+
+/* Horizontal scroll-snap track for mobile card carousels (no JS, no animation) */
+@utility snap-track {
+  display: flex;
+  gap: 0.875rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-padding-inline: 1.25rem;
+  padding-inline: 1.25rem;
+  margin-inline: -1.25rem;
+  padding-block: 0.25rem;
+}
+.snap-track::-webkit-scrollbar {
+  display: none;
+}
+.snap-item {
+  scroll-snap-align: center;
+  flex: 0 0 80%;
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
