@@ -9,7 +9,9 @@ import { ecosystem } from "@/lib/data";
  */
 export function EcosystemPipeline() {
   const [active, setActive] = useState(0);
-  const nodeRefs = useRef([]);
+  
+  // Strongly type nodeRefs to accept button elements or null values
+  const nodeRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const safeEcosystem = ecosystem && ecosystem.length > 0 ? ecosystem : [];
   const currentActive = Math.min(active, Math.max(0, safeEcosystem.length - 1));
@@ -57,7 +59,7 @@ export function EcosystemPipeline() {
         </div>
       </div>
 
-      {/* Carousel Container (Scrollbar hidden via CSS utility classes) */}
+      {/* Carousel Container */}
       <div className="relative w-full overflow-x-auto pb-3 pt-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:overflow-visible md:pb-0">
         {/* Track Container */}
         <div className="relative flex min-w-max md:min-w-0 md:w-full md:grid md:grid-cols-7 md:gap-2">
@@ -100,7 +102,9 @@ export function EcosystemPipeline() {
             return (
               <button
                 key={n.id || i}
-                ref={(el) => { nodeRefs.current[i] = el; }}
+                ref={(el) => {
+                  nodeRefs.current[i] = el;
+                }}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
