@@ -21,16 +21,19 @@ function BrandMark() {
 
 export function Footer() {
   return (
-    <footer className="section-line relative overflow-hidden">
-      {/* background texture */}
+    <footer className=" relative overflow-hidden  bg-[#04080F]">
+            {/* top accent + ambient glow */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-iris/60 to-transparent" />
+      <div className="pointer-events-none absolute -top-32 left-1/4 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-iris/10 blur-[100px]" />
+      {/* soft pattern background (uploaded art), anchored to the bottom, very low opacity */}
       <div
-        className="pointer-events-none absolute inset-0 bg-cover opacity-[0.12]"
-        style={{ backgroundImage: "url('/footerBackground.png')", backgroundPosition: "center top 80%" }}
         aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-[radial-gradient(40rem_18rem_at_50%_0%,rgba(104,110,218,0.18),transparent_70%)]"
-        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] bg-bottom bg-no-repeat bg-cover opacity-[0.06] mix-blend-screen"
+        style={{
+          backgroundImage: "url('/footerBackground.png')",
+          maskImage: "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
+        }}
       />
 
       <div className="container-x relative z-10">

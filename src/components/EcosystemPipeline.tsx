@@ -5,36 +5,49 @@ import { useState } from "react";
 import { ecosystem } from "@/lib/data";
 
 /**
- * "The Ecosystem" — reimagined as an interactive data pipeline.
- * All seven stages are visible on one connected rail; hover/tap a stage to
- * surface its detail below. Replaces the previous dashed-dot flow.
+ * "The Ecosystem" — interactive horizontal data pipeline.
  */
 export function EcosystemPipeline() {
   const [active, setActive] = useState(0);
-  const Node = ecosystem[active];
-  const Icon = Node.icon;
+
+  // Fallbacks to prevent "undefined reading icon" runtime errors
+  const safeEcosystem = ecosystem && ecosystem.length > 0 ? ecosystem : [];
+  const currentActive = Math.min(active, Math.max(0, safeEcosystem.length - 1));
+  const Node = safeEcosystem[currentActive];
+  const Icon = Node?.icon;
+
+  if (!safeEcosystem.length) return null;
 
   return (
-    <div>
-      {/* Rail */}
+    <div className="w-full">
+      {/* Horizontal Rail */}
       <div className="relative">
-        {/* connector line */}
-        <div className="absolute left-0 right-0 top-7 hidden h-px bg-hair md:block" aria-hidden />
+        {/* Background Line (Desktop/Tablet) */}
+        <div 
+          className="absolute left-[calc(100%/14)] right-[calc(100%/14)] top-7 hidden h-px bg-hair md:block" 
+          aria-hidden 
+        />
+        
+        {/* Animated Active Progress Line (Desktop/Tablet) */}
         <motion.div
-          className="absolute top-7 hidden h-px bg-gradient-to-r from-indigo to-indigo-soft md:block"
+          className="absolute left-[calc(100%/14)] top-7 hidden h-px bg-gradient-to-r from-indigo to-indigo-soft md:block"
           aria-hidden
           initial={false}
-          animate={{ width: `${(active / (ecosystem.length - 1)) * 100}%` }}
+          animate={{
+            width: `calc(${(currentActive / (safeEcosystem.length - 1)) * 100}% * (1 - 1/7))`,
+          }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         />
 
+        {/* Pipeline Nodes */}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-7 md:gap-2">
-          {ecosystem.map((n, i) => {
+          {safeEcosystem.map((n, i) => {
             const StageIcon = n.icon;
-            const isActive = i === active;
+            const isActive = i === currentActive;
+
             return (
               <button
-                key={n.id}
+                key={n.id || i}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
@@ -44,18 +57,27 @@ export function EcosystemPipeline() {
                 <span
                   className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border transition-all duration-300 ${
                     isActive
-                      ? "border-indigo bg-indigo/15 text-white shadow-[0_0_28px_-6px_rgba(104,110,218,0.7)]"
+                      ? "border-indigo bg-indigo/15 text-white shadow-[0_0_28px_-6px_rgba(104,110,218,0.7)] bg-surface-1"
                       : "border-hair bg-surface-1 text-indigo-soft group-hover:border-hairbright"
                   }`}
                 >
-                  <StageIcon className="h-6 w-6" />
-                  <span className="tnum absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-base text-[0.55rem] text-faint ring-1 ring-hair">
+                  {StageIcon && <StageIcon className="h-6 w-6" />}
+                  
+                  {/* Step Badge */}
+                  <span
+                    className={`tnum absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full text-[0.55rem] ring-1 transition-colors duration-300 ${
+                      isActive
+                        ? "bg-indigo text-white ring-indigo"
+                        : "bg-base text-faint ring-hair"
+                    }`}
+                  >
                     {i + 1}
                   </span>
                 </span>
+
                 <span
                   className={`mt-3 text-xs font-medium transition-colors ${
-                    isActive ? "text-white" : "text-muted"
+                    isActive ? "text-white" : "text-muted group-hover:text-white"
                   }`}
                 >
                   {n.label}
@@ -66,29 +88,37 @@ export function EcosystemPipeline() {
         </div>
       </div>
 
-      {/* Detail panel */}
+      {/* Detail Panel */}
       <div className="mt-8 overflow-hidden rounded-2xl border border-hair bg-surface-1/50">
         <motion.div
-          key={active}
+          key={currentActive}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:gap-6 sm:p-8"
         >
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-indigo/40 bg-indigo/10 text-indigo-soft">
-            <Icon className="h-6 w-6" />
-          </div>
+          {Icon && (
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-indigo/40 bg-indigo/10 text-indigo-soft">
+              <Icon className="h-6 w-6" />
+            </div>
+          )}
+
           <div>
             <div className="flex items-center gap-3">
-              <h3 className="text-lg font-semibold">{Node.label}</h3>
-              <span className="rounded-full border border-hair px-2.5 py-0.5 text-[0.66rem] text-muted">
-                {Node.sub}
-              </span>
+              <h3 className="text-lg font-semibold">{Node?.label}</h3>
+              {Node?.sub && (
+                <span className="rounded-full border border-hair px-2.5 py-0.5 text-[0.66rem] text-muted">
+                  {Node.sub}
+                </span>
+              )}
             </div>
-            <p className="mt-1.5 text-sm leading-relaxed text-muted">{Node.desc}</p>
+            {Node?.desc && (
+              <p className="mt-1.5 text-sm leading-relaxed text-muted">{Node.desc}</p>
+            )}
           </div>
+
           <div className="tnum ml-auto hidden text-5xl font-bold text-white/5 sm:block">
-            {String(active + 1).padStart(2, "0")}
+            {String(currentActive + 1).padStart(2, "0")}
           </div>
         </motion.div>
       </div>

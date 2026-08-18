@@ -27,7 +27,7 @@ export function Features() {
     <section id="features" className="section-line relative py-24 lg:py-32">
       <div className="container-x">
         <SectionHeader
-          eyebrow="Capabilities"
+    
           title={
             <>
               Everything you need to <span className="gradient-text">track, understand, and manage.</span>

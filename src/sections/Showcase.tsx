@@ -41,7 +41,7 @@ export function Showcase() {
     <section id="showcase" className="section-line relative py-24 lg:py-32">
       <div className="container-x">
         <SectionHeader
-          eyebrow="Product Showcase"
+         
           title={
             <>
               One console for <span className="gradient-text">people, devices, and pay.</span>

@@ -8,14 +8,12 @@ import { Reveal } from "@/components/motion";
 
 export function Platform() {
   const [active, setActive] = useState(0);
-  const progress = (active / (steps.length - 1)) * 100;
-  const step = steps[active];
+  const step = steps[active]; // Restored step definition
 
   return (
     <section id="platform" className="section-line relative py-24 lg:py-32">
       <div className="container-x">
         <SectionHeader
-          eyebrow="The Platform"
           title={
             <>
               From endpoint to insight, <span className="gradient-text">step by step.</span>
@@ -27,28 +25,68 @@ export function Platform() {
         <Reveal className="mt-14 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14" delay={0.1}>
           {/* Stepper rail */}
           <ol className="relative">
-            <span className="absolute left-[18px] top-2 bottom-2 w-px bg-hair" aria-hidden />
-            <span
-              className="absolute left-[18px] top-2 w-px bg-gradient-to-b from-indigo to-indigo-soft transition-[height] duration-500"
-              style={{ height: `calc((100% - 1rem) * ${progress / 100})` }}
-              aria-hidden
-            />
+            {/* SVG Defs for the curved path gradient */}
+            <svg className="sr-only" aria-hidden>
+              <defs>
+                <linearGradient id="s-progress" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#6366f1" />
+                  <stop offset="100%" stopColor="#818cf8" />
+                </linearGradient>
+              </defs>
+            </svg>
+
             {steps.map((s, i) => {
               const isActive = i === active;
               const isDone = i < active;
+              const isEven = i % 2 === 0;
+              const isLast = i === steps.length - 1;
+
               return (
-                <li key={s.n} className="relative">
+                <li key={s.n} className="relative z-10">
+                  {/* S-curve line segment to the next step */}
+                  {!isLast && (
+                    <svg
+                      className="absolute left-[16px] top-[30px] -z-10 h-full w-[52px] pointer-events-none"
+                      preserveAspectRatio="none"
+                      viewBox="0 0 52 100"
+                      aria-hidden
+                    >
+                      {/* Background segment */}
+                      <path
+                        d={isEven ? "M 2 0 C 2 50, 50 50, 50 100" : "M 50 0 C 50 50, 2 50, 2 100"}
+                        fill="none"
+                        stroke="currentColor"
+                        className="text-hair"
+                        strokeWidth="1.5"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                      {/* Animated Progress segment */}
+                      <motion.path
+                        d={isEven ? "M 2 0 C 2 50, 50 50, 50 100" : "M 50 0 C 50 50, 2 50, 2 100"}
+                        fill="none"
+                        stroke="url(#s-progress)"
+                        strokeWidth="1.5"
+                        vectorEffect="non-scaling-stroke"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: isDone ? 1 : 0 }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                      />
+                    </svg>
+                  )}
+
                   <button
                     onClick={() => setActive(i)}
                     aria-current={isActive ? "step" : undefined}
-                    className="group flex w-full items-center gap-4 py-3 text-left"
+                    className={`group flex w-full items-center gap-4 py-3 text-left transition-all duration-500 ease-out ${
+                      isEven ? "pl-0" : "pl-[48px]"
+                    }`}
                   >
                     <span
                       className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-xs font-semibold transition-colors ${
                         isActive
                           ? "border-indigo bg-indigo text-white shadow-[0_0_20px_-4px_rgba(104,110,218,0.8)]"
                           : isDone
-                            ? "border-indigo/50 bg-indigo/15 text-indigo-soft"
+                            ? "border-indigo/50 bg-indigo text-indigo-soft"
                             : "border-hairbright bg-surface-1 text-faint group-hover:text-white"
                       }`}
                     >
@@ -67,7 +105,7 @@ export function Platform() {
             })}
           </ol>
 
-          {/* Active step panel — keyed fade-in, no exit gap (fixes transparency) */}
+          {/* Active step panel */}
           <div className="card min-h-[240px] p-7 lg:p-9">
             <motion.div
               key={active}

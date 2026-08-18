@@ -76,7 +76,7 @@ export function Pricing() {
     <section id="pricing" className="section-line relative py-24 lg:py-32">
       <div className="container-x">
         <SectionHeader
-          eyebrow="Pricing"
+         
           title={
             <>
               Simple pricing that <span className="gradient-text">scales with your workforce.</span>

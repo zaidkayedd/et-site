@@ -16,14 +16,7 @@ export function Hero() {
 
       <div className="container-x relative">
         <div className="mx-auto max-w-3xl text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="text-sm font-medium text-indigo-soft"
-          >
-            Workforce management platform
-          </motion.p>
+     
 
           <motion.h1
             initial={{ opacity: 0, y: 24 }}

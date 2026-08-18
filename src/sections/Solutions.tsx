@@ -48,7 +48,7 @@ export function Solutions() {
     <section id="solutions" className="section-line relative py-24 lg:py-32">
       <div className="container-x">
         <SectionHeader
-          eyebrow="Solutions"
+   
           title={
             <>
               Built for every team that <span className="gradient-text">runs on people.</span>

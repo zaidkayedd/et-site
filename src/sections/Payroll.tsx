@@ -16,7 +16,7 @@ export function Payroll() {
       <div className="container-x relative grid gap-14 lg:grid-cols-2 lg:items-center">
         <div>
           <SectionHeader
-            eyebrow="Payroll"
+          
             title={
               <>
                 Workforce data, <span className="gradient-text">ready for payroll.</span>

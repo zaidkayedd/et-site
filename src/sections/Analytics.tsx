@@ -42,7 +42,7 @@ export function Analytics() {
     <section id="analytics" className="section-line relative py-24 lg:py-32">
       <div className="container-x">
         <SectionHeader
-          eyebrow="Workforce Analytics"
+    
           title={
             <>
               Turn activity data into <span className="gradient-text">actionable insight.</span>

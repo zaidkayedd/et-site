@@ -7,7 +7,7 @@ export function Ecosystem() {
     <section id="ecosystem" className="section-line relative py-24 lg:py-32">
       <div className="container-x">
         <SectionHeader
-          eyebrow="The Ecosystem"
+        
           title={
             <>
               One platform. <span className="gradient-text">Complete workforce visibility.</span>
