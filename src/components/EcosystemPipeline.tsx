@@ -1,33 +1,83 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ecosystem } from "@/lib/data";
 
 /**
- * "The Ecosystem" — interactive pipeline with touch-native mobile scrolling.
+ * "The Ecosystem" — interactive horizontal data pipeline.
  */
 export function EcosystemPipeline() {
   const [active, setActive] = useState(0);
+  const nodeRefs = useRef([]);
 
   const safeEcosystem = ecosystem && ecosystem.length > 0 ? ecosystem : [];
   const currentActive = Math.min(active, Math.max(0, safeEcosystem.length - 1));
   const Node = safeEcosystem[currentActive];
   const Icon = Node?.icon;
 
+  // Immediately scroll the carousel on mobile whenever active node changes
+  useEffect(() => {
+    const currentNodeEl = nodeRefs.current[currentActive];
+    if (currentNodeEl) {
+      currentNodeEl.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [currentActive]);
+
   if (!safeEcosystem.length) return null;
 
   return (
     <div className="w-full">
-      {/* Pipeline Rail Area */}
-      <div className="relative">
-        {/* Right Gradient Fade Hint for Mobile Scrolling */}
-        <div className="pointer-events-none absolute right-0 top-0 z-20 h-full w-10 bg-gradient-to-l from-base to-transparent md:hidden" />
+      {/* Mobile Controls Header */}
+      <div className="mb-3 flex items-center justify-between gap-3 md:hidden">
+        <span className="text-[0.68rem] font-medium uppercase tracking-wider text-faint">
+          Stage {currentActive + 1} of {safeEcosystem.length}
+        </span>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setActive((v) => Math.max(0, v - 1))}
+            disabled={currentActive === 0}
+            className="rounded-lg border border-hair px-3 py-1 text-xs text-muted transition-colors hover:text-white disabled:opacity-30"
+          >
+            Prev
+          </button>
+          <button
+            type="button"
+            onClick={() => setActive((v) => Math.min(safeEcosystem.length - 1, v + 1))}
+            disabled={currentActive === safeEcosystem.length - 1}
+            className="rounded-lg border border-hair bg-surface-1 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-surface-1/80 disabled:opacity-30"
+          >
+            Next
+          </button>
+        </div>
+      </div>
 
-        {/* Scrollable Container (Horizontal Swipe on Mobile, Grid on Desktop) */}
-        <div className="no-scrollbar relative flex overflow-x-auto pb-3 pt-1 snap-x snap-mandatory md:grid md:grid-cols-7 md:gap-2 md:overflow-visible md:pb-0">
+      {/* Carousel Container (Scrollbar hidden via CSS utility classes) */}
+      <div className="relative w-full overflow-x-auto pb-3 pt-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:overflow-visible md:pb-0">
+        {/* Track Container */}
+        <div className="relative flex min-w-max md:min-w-0 md:w-full md:grid md:grid-cols-7 md:gap-2">
           
-          {/* Connector Track - Desktop */}
+          {/* Connector Line - Mobile */}
+          <div 
+            className="absolute left-14 right-14 top-7 h-px bg-hair md:hidden" 
+            aria-hidden 
+          />
+          <motion.div
+            className="absolute left-14 top-7 h-px bg-gradient-to-r from-indigo to-indigo-soft md:hidden"
+            aria-hidden
+            initial={false}
+            animate={{
+              width: `calc(${(currentActive / (safeEcosystem.length - 1))} * (100% - 7rem))`,
+            }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          />
+
+          {/* Connector Line - Desktop */}
           <div 
             className="absolute left-[calc(100%/14)] right-[calc(100%/14)] top-7 hidden h-px bg-hair md:block" 
             aria-hidden 
@@ -42,9 +92,6 @@ export function EcosystemPipeline() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           />
 
-          {/* Connector Track - Mobile */}
-          <div className="absolute left-10 right-10 top-7 h-px bg-hair md:hidden" aria-hidden />
-
           {/* Pipeline Nodes */}
           {safeEcosystem.map((n, i) => {
             const StageIcon = n.icon;
@@ -53,10 +100,11 @@ export function EcosystemPipeline() {
             return (
               <button
                 key={n.id || i}
+                ref={(el) => { nodeRefs.current[i] = el; }}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
-                className="group relative flex w-28 shrink-0 snap-center flex-col items-center text-center focus:outline-none md:w-auto md:shrink"
+                className="group relative flex w-28 shrink-0 flex-col items-center text-center focus:outline-none md:w-auto md:shrink"
                 aria-pressed={isActive}
               >
                 <span
@@ -90,29 +138,6 @@ export function EcosystemPipeline() {
               </button>
             );
           })}
-        </div>
-      </div>
-
-      {/* Mobile-Only Quick Step Switcher */}
-      <div className="mt-2 flex items-center justify-between gap-3 md:hidden">
-        <span className="text-[0.68rem] font-medium uppercase tracking-wider text-faint">
-          Stage {currentActive + 1} of {safeEcosystem.length}
-        </span>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setActive((v) => Math.max(0, v - 1))}
-            disabled={currentActive === 0}
-            className="rounded-lg border border-hair px-3 py-1 text-xs text-muted transition-colors hover:text-white disabled:opacity-30"
-          >
-            Prev
-          </button>
-          <button
-            onClick={() => setActive((v) => Math.min(safeEcosystem.length - 1, v + 1))}
-            disabled={currentActive === safeEcosystem.length - 1}
-            className="rounded-lg border border-hair bg-surface-1 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-surface-1/80 disabled:opacity-30"
-          >
-            Next
-          </button>
         </div>
       </div>
 
