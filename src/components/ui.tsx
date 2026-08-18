@@ -61,7 +61,7 @@ export function SectionHeader({
   desc,
   align = "left",
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: ReactNode;
   desc?: string;
   align?: "left" | "center";
