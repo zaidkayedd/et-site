@@ -5,15 +5,15 @@ import { Button } from "@/components/ui";
 
 function BrandMark() {
   return (
-    <Link href="/#top" className="flex items-center gap-2.5" aria-label="Employee Tracker home">
+    <Link href="/#top" className="flex items-center gap-2.5" aria-label="Artl Tracker home">
       <span className="flex items-end gap-[3px]" aria-hidden>
         <span className="h-3 w-[3px] rounded-full bg-indigo" />
         <span className="h-5 w-[3px] rounded-full bg-indigo-soft" />
         <span className="h-4 w-[3px] rounded-full bg-mint" />
         <span className="h-6 w-[3px] rounded-full bg-mint-soft" />
       </span>
-      <span className="text-[0.95rem] font-semibold tracking-tight">
-        Employee<span className="text-muted"> Tracker</span>
+        <span className="text-[0.95rem] font-semibold tracking-wide">
+        Artl Tracker
       </span>
     </Link>
   );
@@ -95,7 +95,7 @@ export function Footer() {
             <img src="/artlstudio-long-white.webp" alt="Artl Studio" className="h-4 w-auto opacity-30" />
           </a>
           <p className="order-2 text-xs text-faint sm:order-2">
-            © {new Date().getFullYear()} Employee Tracker. All rights reserved.
+            © {new Date().getFullYear()} Artl Tracker. All rights reserved.
           </p>
         
         </div>

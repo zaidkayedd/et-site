@@ -1,6 +1,6 @@
-# Employee Tracker — Marketing Website
+# Artl Tracker — Marketing Website
 
-A premium, privacy-conscious marketing site for **Employee Tracker**, a workforce
+A premium, privacy-conscious marketing site for **Artl Tracker**, a workforce
 intelligence platform (activity monitoring, analytics, device management, and payroll).
 Rebuilt on the ArtlEms/ArtlOps stack with a Resend-inspired dark aesthetic.
 

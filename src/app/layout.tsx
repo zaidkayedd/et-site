@@ -17,7 +17,7 @@ const onest = localFont({
   display: "swap",
 });
 
-const title = "Employee Tracker — Workforce visibility, minus the guesswork";
+const title = "Artl Tracker — Workforce visibility, minus the guesswork";
 const description =
   "Understand how work actually happens. A privacy-conscious workforce platform that measures activity signals — never screenshots or keystrokes — and turns them into analytics, device management, and payroll-ready data.";
 
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title,
     description,
     type: "website",
-    siteName: "Employee Tracker",
+    siteName: "Artl Tracker",
   },
   twitter: { card: "summary_large_image", title, description },
   icons: { icon: "/favicon.svg" },

@@ -7,8 +7,8 @@ import { TrackWordmark } from "@/components/TrackWordmark";
 import { contact } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Contact — Employee Tracker",
-  description: "Talk to the Employee Tracker team about demos, pricing, security, or partnerships.",
+  title: "Contact — Artl Tracker",
+  description: "Talk to the Artl Tracker team about demos, pricing, security, or partnerships.",
 };
 
 const channelIcons = [Mail, MessageSquare, LifeBuoy];

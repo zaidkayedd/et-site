@@ -8,15 +8,15 @@ import { nav } from "@/lib/data";
 
 function Logo() {
   return (
-    <Link href="/#top" className="flex items-center gap-2.5" aria-label="Employee Tracker home">
+    <Link href="/#top" className="flex items-center gap-2.5" aria-label="Artl Tracker home">
       <span className="flex items-end gap-[3px]" aria-hidden>
         <span className="h-3 w-[3px] rounded-full bg-indigo" />
         <span className="h-5 w-[3px] rounded-full bg-indigo-soft" />
         <span className="h-4 w-[3px] rounded-full bg-mint" />
         <span className="h-6 w-[3px] rounded-full bg-mint-soft" />
       </span>
-      <span className="text-[0.95rem] font-semibold tracking-tight">
-        Employee<span className="text-muted"> Tracker</span>
+      <span className="text-[0.95rem] font-semibold tracking-wide">
+        Artl Tracker
       </span>
     </Link>
   );
