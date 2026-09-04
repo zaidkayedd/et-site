@@ -92,7 +92,9 @@
   /* Tabular figures for data (single-font mandate: Onest, tabular where numeric) */
   .tnum {
     font-variant-numeric: tabular-nums;
-    font-feature-settings: "tnum" 1, "cv01" 1;
+    font-feature-settings:
+      "tnum" 1,
+      "cv01" 1;
   }
 }
 
@@ -135,7 +137,10 @@
 }
 
 @utility card-hover {
-  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease;
 }
 .card-hover:hover {
   border-color: var(--color-hairbright);
@@ -151,7 +156,7 @@
 }
 
 @utility gradient-text {
-  background: linear-gradient(96deg, #ffffff 0%, #b6b9f0 45%, #686eda 100%);
+  background: linear-gradient(96deg, #ffffff 0%, #15f3af 45%, #686eda 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -159,10 +164,15 @@
 
 /* Fine hairline grid (used sparingly, behind hero) */
 @utility bg-grid {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
   background-size: 60px 60px;
-  -webkit-mask-image: radial-gradient(60% 60% at 50% 30%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(
+    60% 60% at 50% 30%,
+    #000 30%,
+    transparent 100%
+  );
   mask-image: radial-gradient(60% 60% at 50% 30%, #000 30%, transparent 100%);
 }
 

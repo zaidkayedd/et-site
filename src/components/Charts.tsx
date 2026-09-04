@@ -68,10 +68,44 @@ export function ActivityAreaChart() {
           />
         ))}
 
-        <motion.path d={area("active")} fill="url(#aActive)" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.3 }} />
-        <motion.path d={area("idle")} fill="url(#aIdle)" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.45 }} />
-        <motion.path d={line("active")} fill="none" stroke="#686EDA" strokeWidth={2.2} strokeLinecap="round" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.3, ease: "easeInOut" }} />
-        <motion.path d={line("idle")} fill="none" stroke="#15F3AF" strokeWidth={2.2} strokeLinecap="round" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.5, ease: "easeInOut" }} />
+        <motion.path
+          d={area("active")}
+          fill="url(#aActive)"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        />
+        <motion.path
+          d={area("idle")}
+          fill="url(#aIdle)"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+        />
+        <motion.path
+          d={line("active")}
+          fill="none"
+          stroke="#686EDA"
+          strokeWidth={2.2}
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.3, ease: "easeInOut" }}
+        />
+        <motion.path
+          d={line("idle")}
+          fill="none"
+          stroke="#15F3AF"
+          strokeWidth={2.2}
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        />
       </svg>
       <div className="mt-2 flex justify-between px-1">
         {data.map((d) => (
@@ -82,10 +116,18 @@ export function ActivityAreaChart() {
       </div>
       <div className="mt-3 flex items-center gap-5 text-xs text-muted">
         <span className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full" style={{ background: "#686EDA" }} /> Active
+          <span
+            className="h-2 w-2 rounded-full"
+            style={{ background: "#686EDA" }}
+          />{" "}
+          Active
         </span>
         <span className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full" style={{ background: "#15F3AF" }} /> Idle
+          <span
+            className="h-2 w-2 rounded-full"
+            style={{ background: "#15F3AF" }}
+          />{" "}
+          Idle
         </span>
       </div>
     </div>
@@ -94,7 +136,7 @@ export function ActivityAreaChart() {
 
 /* ---------------- App-usage donut ---------------- */
 
-const donutColors = ["#686EDA", "#8A8FE8", "#3B3F7A", "#b6b9f0", "#15F3AF"];
+const donutColors = ["#8338ec", "#686EDA", "#868be1", "#0d9269", "#15F3AF"];
 
 export function AppDonut() {
   const total = appUsage.reduce((s, d) => s + d.value, 0);
@@ -105,7 +147,14 @@ export function AppDonut() {
   return (
     <div className="flex items-center gap-6">
       <svg viewBox="0 0 140 140" className="h-36 w-36 shrink-0 -rotate-90">
-        <circle cx="70" cy="70" r={R} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="14" />
+        <circle
+          cx="70"
+          cy="70"
+          r={R}
+          fill="none"
+          stroke="rgba(255,255,255,0.06)"
+          strokeWidth="14"
+        />
         {appUsage.map((d, i) => {
           const frac = d.value / total;
           const dash = frac * C;
@@ -133,7 +182,10 @@ export function AppDonut() {
       <ul className="space-y-2 text-sm">
         {appUsage.map((d, i) => (
           <li key={d.name} className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-sm" style={{ background: donutColors[i % donutColors.length] }} />
+            <span
+              className="h-2.5 w-2.5 rounded-sm"
+              style={{ background: donutColors[i % donutColors.length] }}
+            />
             <span className="text-muted">{d.name}</span>
             <span className="tnum ml-auto pl-4 text-white/80">{d.value}%</span>
           </li>
@@ -161,7 +213,11 @@ export function TeamBars() {
               initial={{ width: 0 }}
               whileInView={{ width: `${t.pct}%` }}
               viewport={{ once: true }}
-              transition={{ duration: 1, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                duration: 1,
+                delay: i * 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             />
           </div>
         </div>

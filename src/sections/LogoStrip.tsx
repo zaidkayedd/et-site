@@ -5,7 +5,6 @@ const stats = [
   { to: 30, suffix: "-min", label: "Default summary window" },
   { to: 2, suffix: "", label: "Platforms — Windows & macOS" },
   { to: 3, suffix: "", label: "Access roles built in" },
-  { to: 0, suffix: "", label: "Screenshots ever captured" },
 ];
 
 export function LogoStrip() {
@@ -18,7 +17,10 @@ export function LogoStrip() {
           </p>
         </Reveal>
 
-        <Reveal className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-4" delay={0.1}>
+        <Reveal
+          className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-3 justify-center justify-items-center"
+          delay={0.1}
+        >
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <div className="text-3xl font-semibold sm:text-4xl">

@@ -9,7 +9,7 @@ import { ecosystem } from "@/lib/data";
  */
 export function EcosystemPipeline() {
   const [active, setActive] = useState(0);
-  
+
   // Strongly type nodeRefs to accept button elements or null values
   const nodeRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -50,7 +50,9 @@ export function EcosystemPipeline() {
           </button>
           <button
             type="button"
-            onClick={() => setActive((v) => Math.min(safeEcosystem.length - 1, v + 1))}
+            onClick={() =>
+              setActive((v) => Math.min(safeEcosystem.length - 1, v + 1))
+            }
             disabled={currentActive === safeEcosystem.length - 1}
             className="rounded-lg border border-hair bg-surface-1 px-3 py-1 text-xs font-medium text-white transition-colors hover:bg-surface-1/80 disabled:opacity-30"
           >
@@ -63,26 +65,25 @@ export function EcosystemPipeline() {
       <div className="relative w-full overflow-x-auto pb-3 pt-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:overflow-visible md:pb-0">
         {/* Track Container */}
         <div className="relative flex min-w-max md:min-w-0 md:w-full md:grid md:grid-cols-7 md:gap-2">
-          
           {/* Connector Line - Mobile */}
-          <div 
-            className="absolute left-14 right-14 top-7 h-px bg-hair md:hidden" 
-            aria-hidden 
+          <div
+            className="absolute left-14 right-14 top-7 h-px bg-hair md:hidden"
+            aria-hidden
           />
           <motion.div
             className="absolute left-14 top-7 h-px bg-gradient-to-r from-indigo to-indigo-soft md:hidden"
             aria-hidden
             initial={false}
             animate={{
-              width: `calc(${(currentActive / (safeEcosystem.length - 1))} * (100% - 7rem))`,
+              width: `calc(${currentActive / (safeEcosystem.length - 1)} * (100% - 7rem))`,
             }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           />
 
           {/* Connector Line - Desktop */}
-          <div 
-            className="absolute left-[calc(100%/14)] right-[calc(100%/14)] top-7 hidden h-px bg-hair md:block" 
-            aria-hidden 
+          <div
+            className="absolute left-[calc(100%/14)] right-[calc(100%/14)] top-7 hidden h-px bg-hair md:block"
+            aria-hidden
           />
           <motion.div
             className="absolute left-[calc(100%/14)] top-7 hidden h-px bg-gradient-to-r from-indigo to-indigo-soft md:block"
@@ -119,7 +120,7 @@ export function EcosystemPipeline() {
                   }`}
                 >
                   {StageIcon && <StageIcon className="h-6 w-6" />}
-                  
+
                   {/* Step Badge */}
                   <span
                     className={`tnum absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full text-[0.55rem] ring-1 transition-colors duration-300 ${
@@ -134,7 +135,9 @@ export function EcosystemPipeline() {
 
                 <span
                   className={`mt-3 text-xs font-medium transition-colors ${
-                    isActive ? "text-white" : "text-muted group-hover:text-white"
+                    isActive
+                      ? "text-white"
+                      : "text-muted group-hover:text-white"
                   }`}
                 >
                   {n.label}
@@ -167,7 +170,9 @@ export function EcosystemPipeline() {
 
           <div>
             <div className="flex items-center gap-3">
-              <h3 className="text-base font-semibold text-white sm:text-lg">{Node?.label}</h3>
+              <h3 className="text-base font-semibold text-white sm:text-lg">
+                {Node?.label}
+              </h3>
               {Node?.sub && (
                 <span className="rounded-full border border-hair px-2.5 py-0.5 text-[0.66rem] text-muted">
                   {Node.sub}
@@ -175,7 +180,9 @@ export function EcosystemPipeline() {
               )}
             </div>
             {Node?.desc && (
-              <p className="mt-1.5 text-xs leading-relaxed text-muted sm:text-sm">{Node.desc}</p>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted sm:text-sm">
+                {Node.desc}
+              </p>
             )}
           </div>
 
