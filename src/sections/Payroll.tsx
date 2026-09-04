@@ -6,7 +6,14 @@ import { payrollKpis } from "@/lib/data";
 import { Button, SectionHeader } from "@/components/ui";
 import { fadeUp, Reveal, RevealGroup } from "@/components/motion";
 
-const inputs = ["Working hours", "Attendance", "Overtime", "Leave", "Breaks", "Payroll periods"];
+const inputs = [
+  "Working hours",
+  "Attendance",
+  "Overtime",
+  "Leave",
+  "Breaks",
+  "Payroll periods",
+];
 
 export function Payroll() {
   return (
@@ -16,10 +23,10 @@ export function Payroll() {
       <div className="container-x relative grid gap-14 lg:grid-cols-2 lg:items-center">
         <div>
           <SectionHeader
-          
             title={
               <>
-                Workforce data, <span className="gradient-text">ready for payroll.</span>
+                Workforce data,{" "}
+                <span className="gradient-text">ready for payroll.</span>
               </>
             }
             desc="Payroll is a natural extension of the platform. The same attendance, working-time, and overtime data that powers your analytics feeds directly into payroll workflows — no re-entry, no reconciliation guesswork."
@@ -56,7 +63,9 @@ export function Payroll() {
               </div>
               <div>
                 <div className="text-sm font-medium">Payroll overview</div>
-                <div className="text-[0.62rem] text-faint">Period · Nov 2026</div>
+                <div className="text-[0.62rem] text-faint">
+                  Period · Nov 2026
+                </div>
               </div>
               <button className="ml-auto flex items-center gap-1.5 rounded-lg border border-hair px-2.5 py-1.5 text-xs text-muted transition-colors hover:text-white">
                 Export <ArrowRight className="h-3.5 w-3.5" />
@@ -71,7 +80,10 @@ export function Payroll() {
                   className="rounded-xl border border-hair bg-white/[0.02] p-4"
                 >
                   <div className="text-[0.68rem] text-faint">{k.label}</div>
-                  <div className="tnum mt-1.5 text-xl font-semibold" style={i === 0 ? { color: "#8A8FE8" } : undefined}>
+                  <div
+                    className="tnum mt-1.5 text-xl font-semibold"
+                    style={i === 0 ? { color: "#8A8FE8" } : undefined}
+                  >
                     {k.value}
                   </div>
                 </motion.div>
@@ -86,7 +98,9 @@ export function Payroll() {
               <div className="h-2 overflow-hidden rounded-full bg-white/[0.05]">
                 <motion.div
                   className="h-full rounded-full"
-                  style={{ background: "linear-gradient(90deg,#686EDA,#8A8FE8)" }}
+                  style={{
+                    background: "linear-gradient(90deg,#686EDA,#8A8FE8)",
+                  }}
                   initial={{ width: 0 }}
                   whileInView={{ width: "89%" }}
                   viewport={{ once: true }}
@@ -95,9 +109,6 @@ export function Payroll() {
               </div>
             </div>
           </div>
-          <p className="mt-3 text-center text-[0.62rem] text-faint">
-            Illustrative data · payroll module evolves with your configuration
-          </p>
         </Reveal>
       </div>
     </section>
