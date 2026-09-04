@@ -69,13 +69,17 @@ export function SectionHeader({
   const alignCls = align === "center" ? "text-center mx-auto" : "text-left";
   return (
     <Reveal className={`max-w-2xl ${alignCls}`}>
-      <div className={`eyebrow mb-4 ${align === "center" ? "justify-center flex" : ""}`}>
+      <div
+        className={`eyebrow mb-4 ${align === "center" ? "justify-center flex" : ""}`}
+      >
         {eyebrow}
       </div>
       <h2 className="text-[length:var(--text-display-md)] font-semibold leading-[1.08]">
         {title}
       </h2>
-      {desc && <p className="mt-4 text-[0.98rem] text-muted leading-relaxed">{desc}</p>}
+      {desc && (
+        <p className="mt-4 text-[0.98rem] text-muted leading-relaxed">{desc}</p>
+      )}
     </Reveal>
   );
 }
@@ -86,10 +90,12 @@ export function SignalBars({
   count = 5,
   className = "",
   color = "#686EDA",
+  colors,
 }: {
   count?: number;
   className?: string;
   color?: string;
+  colors?: string[];
 }) {
   return (
     <div className={`flex items-end gap-[3px] h-5 ${className}`} aria-hidden>
@@ -99,7 +105,8 @@ export function SignalBars({
           className="w-[3px] rounded-full"
           style={{
             height: "100%",
-            background: color,
+            background:
+              colors && colors.length ? colors[i % colors.length] : color,
             transformOrigin: "bottom",
             animation: `signal-pulse ${1.4 + (i % 3) * 0.35}s ease-in-out ${i * 0.12}s infinite`,
           }}
@@ -157,9 +164,15 @@ export function StatusDot({ tone }: { tone: "active" | "idle" | "healthy" }) {
     <span className="relative inline-flex h-2 w-2">
       <span
         className="absolute inline-flex h-full w-full rounded-full opacity-60"
-        style={{ background: c, animation: "ping 2s cubic-bezier(0,0,0.2,1) infinite" }}
+        style={{
+          background: c,
+          animation: "ping 2s cubic-bezier(0,0,0.2,1) infinite",
+        }}
       />
-      <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: c }} />
+      <span
+        className="relative inline-flex h-2 w-2 rounded-full"
+        style={{ background: c }}
+      />
     </span>
   );
 }

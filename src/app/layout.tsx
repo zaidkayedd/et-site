@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 // Single typeface across the whole site (per brief): Onest.
 // Self-hosted (from the Onest OFL release) so it builds offline and ships
@@ -70,7 +71,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={onest.variable}>
-      <body>{children}</body>
+      <body>
+        <ScrollToTop />
+        {children}
+      </body>
     </html>
   );
 }

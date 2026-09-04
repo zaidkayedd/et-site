@@ -35,10 +35,12 @@ export function AgentPrivacy() {
       <div className="container-x">
         {/* Unified Modern Header */}
         <SectionHeader
-          
           title={
             <>
-              Visibility <span className="gradient-text">without invasive surveillance.</span>
+              Visibility{" "}
+              <span className="gradient-text">
+                without invasive surveillance.
+              </span>
             </>
           }
           desc="Built on .NET 9, our lightweight desktop service measures high-level engagement signals while enforcing strict privacy boundaries by default."
@@ -46,7 +48,6 @@ export function AgentPrivacy() {
 
         {/* Bento Grid Layout */}
         <div className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-stretch">
-          
           {/* LEFT: Live Endpoint Telemetry Widget (7 cols) */}
           <Reveal className="lg:col-span-7 flex flex-col justify-between rounded-3xl border border-hair bg-surface-1/60 p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden group">
             {/* Ambient Background Glow */}
@@ -61,19 +62,28 @@ export function AgentPrivacy() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-base font-semibold text-white">Tracker Service</span>
+                      <span className="text-base font-semibold text-white">
+                        Tracker Service
+                      </span>
                       <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[0.65rem] font-medium text-emerald-400 border border-emerald-500/20">
                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         Active
                       </span>
                     </div>
-                    <p className="text-xs text-muted">.NET 9 Background Service • macOS & Windows</p>
+                    <p className="text-xs text-muted">
+                      .NET 9 Background Service • macOS & Windows
+                    </p>
                   </div>
                 </div>
 
                 <div className="hidden sm:flex items-center gap-3 rounded-xl border border-hair bg-base/50 px-3 py-1.5">
-                  <span className="text-[0.68rem] text-faint uppercase font-medium tracking-wider">Signal Level</span>
-                  <SignalBars count={7} color="#686EDA" />
+                  <span className="text-[0.68rem] text-faint uppercase font-medium tracking-wider">
+                    Signal Level
+                  </span>
+                  <SignalBars
+                    count={7}
+                    colors={["#15f3af", "#fb7185", "#f59e0b"]}
+                  />
                 </div>
               </div>
 
@@ -100,13 +110,22 @@ export function AgentPrivacy() {
 
             {/* Bottom Status Footer */}
             <div className="mt-8 flex items-center justify-between rounded-xl border border-hair/50 bg-base/30 px-4 py-3 text-xs text-muted">
-              <span>Memory Footprint: <strong className="text-white font-mono">&lt; 18 MB</strong></span>
-              <span>CPU Usage: <strong className="text-white font-mono">&lt; 0.2%</strong></span>
+              <span>
+                Memory Footprint:{" "}
+                <strong className="text-white font-mono">&lt; 18 MB</strong>
+              </span>
+              <span>
+                CPU Usage:{" "}
+                <strong className="text-white font-mono">&lt; 0.2%</strong>
+              </span>
             </div>
           </Reveal>
 
           {/* RIGHT: Modern Privacy Matrix Card (5 cols) */}
-          <Reveal className="lg:col-span-5 flex flex-col justify-between rounded-3xl border border-hair bg-surface-1/60 p-6 sm:p-8 backdrop-blur-xl" delay={0.15}>
+          <Reveal
+            className="lg:col-span-5 flex flex-col justify-between rounded-3xl border border-hair bg-surface-1/60 p-6 sm:p-8 backdrop-blur-xl"
+            delay={0.15}
+          >
             <div>
               <div className="flex items-center justify-between border-b border-hair/60 pb-5">
                 <div className="flex items-center gap-3">
@@ -114,8 +133,12 @@ export function AgentPrivacy() {
                     <ShieldCheck className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-white">Privacy Safeguards</h3>
-                    <p className="text-xs text-muted">Zero invasive telemetry</p>
+                    <h3 className="text-base font-semibold text-white">
+                      Privacy Safeguards
+                    </h3>
+                    <p className="text-xs text-muted">
+                      Zero invasive telemetry
+                    </p>
                   </div>
                 </div>
               </div>
@@ -129,7 +152,10 @@ export function AgentPrivacy() {
                   </span>
                   <ul className="mt-2.5 space-y-2">
                     {privacyDoes.map((p) => (
-                      <li key={p} className="flex items-center gap-2.5 text-xs text-white/80">
+                      <li
+                        key={p}
+                        className="flex items-center gap-2.5 text-xs text-white/80"
+                      >
                         <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-indigo/20 text-indigo-soft">
                           <Check className="h-2.5 w-2.5" />
                         </div>
@@ -148,7 +174,10 @@ export function AgentPrivacy() {
                   </span>
                   <ul className="mt-2.5 space-y-2">
                     {privacyNever.map((p) => (
-                      <li key={p} className="flex items-center gap-2.5 text-xs text-white/50">
+                      <li
+                        key={p}
+                        className="flex items-center gap-2.5 text-xs text-white/50"
+                      >
                         <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-rose-500/10 text-rose-400">
                           <X className="h-2.5 w-2.5" />
                         </div>
@@ -171,7 +200,12 @@ export function AgentPrivacy() {
                   <Lock className="h-4 w-4" />
                 </div>
                 <p className="text-sm leading-relaxed text-white/85">
-                  <span className="font-semibold text-white">Trust is built-in.</span> Organizations configure transparent rules, ensuring employees retain full privacy over personal files, keystrokes, and messaging.
+                  <span className="font-semibold text-white">
+                    Trust is built-in.
+                  </span>{" "}
+                  Organizations configure transparent rules, ensuring employees
+                  retain full privacy over personal files, keystrokes, and
+                  messaging.
                 </p>
               </div>
             </div>

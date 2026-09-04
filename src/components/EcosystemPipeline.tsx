@@ -18,15 +18,21 @@ export function EcosystemPipeline() {
   const Node = safeEcosystem[currentActive];
   const Icon = Node?.icon;
 
-  // Immediately scroll the carousel on mobile whenever active node changes
+  // Scroll the carousel on mobile when the active node changes — but NOT on first mount
+  // (scrollIntoView on mount was dragging the whole page down past the hero), and only
+  // horizontally within the carousel so it never moves the page vertically.
+  const didMountRef = useRef(false);
   useEffect(() => {
-    const currentNodeEl = nodeRefs.current[currentActive];
-    if (currentNodeEl) {
-      currentNodeEl.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
+    const el = nodeRefs.current[currentActive];
+    const container = el?.parentElement;
+    if (el && container) {
+      const target =
+        el.offsetLeft - container.clientWidth / 2 + el.clientWidth / 2;
+      container.scrollTo({ left: target, behavior: "smooth" });
     }
   }, [currentActive]);
 
