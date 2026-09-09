@@ -12,6 +12,7 @@ import { Solutions } from "@/sections/Solutions";
 import { Pricing } from "@/sections/Pricing";
 import { CTA } from "@/sections/CTA";
 import { Footer } from "@/sections/Footer";
+import { SignalLines } from "@/components/SignalLines";
 
 export default function Home() {
   return (
@@ -25,17 +26,23 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <LogoStrip />
-        <Ecosystem />
-        <Features />
-        <AgentPrivacy />
-        <Analytics />
-        <Showcase />
-        <Payroll />
-        <Platform />
-        <Solutions />
-        <Pricing />
-        <CTA />
+        {/* Ambient signal-line animation behind everything EXCEPT the hero */}
+        <div className="relative">
+          <SignalLines />
+          <div className="relative z-10">
+            <LogoStrip />
+            <Ecosystem />
+            <Features />
+            <AgentPrivacy />
+            <Analytics />
+            <Showcase />
+            <Payroll />
+            <Platform />
+            <Solutions />
+            <Pricing />
+            <CTA />
+          </div>
+        </div>
       </main>
       <Footer />
     </>
