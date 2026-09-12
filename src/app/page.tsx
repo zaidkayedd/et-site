@@ -26,11 +26,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <LogoStrip />
         {/* Ambient signal-line animation behind everything EXCEPT the hero */}
         <div className="relative">
           <SignalLines />
           <div className="relative z-10">
-            <LogoStrip />
             <Ecosystem />
             <Features />
             <AgentPrivacy />
