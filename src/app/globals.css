@@ -133,7 +133,11 @@
   position: relative;
   border-radius: var(--radius-2xl);
   border: 1px solid var(--color-hair);
-  background: rgba(255, 255, 255, 0.018);
+  /* Opaque surface base so the page/background animation can't show through the card,
+     with the original faint white sheen layered on top to keep the same look. */
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0.018)),
+    var(--color-surface-1);
 }
 
 @utility card-hover {

@@ -94,7 +94,7 @@ export function Hero3DDashboard() {
       >
         {/* Screen */}
         <div
-          className="card overflow-hidden shadow-card"
+          className="card overflow-hidden shadow-card !bg-white/[0.018]"
           style={{
             transform: "translateZ(0px)",
             transformStyle: "preserve-3d",

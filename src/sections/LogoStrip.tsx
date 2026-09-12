@@ -9,7 +9,7 @@ const stats = [
 
 export function LogoStrip() {
   return (
-    <section className="section-line border-b border-hair bg-surface-1/30">
+    <section className="section-line border-b border-hair bg-surface-1">
       <div className="container-x py-12">
         <Reveal className="text-center">
           <p className="text-[0.7rem] font-medium uppercase tracking-[0.2em] text-faint">

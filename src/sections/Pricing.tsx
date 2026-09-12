@@ -17,8 +17,8 @@ function PlanCard({ p, i, yearly }: { p: Plan; i: number; yearly: boolean }) {
     <div
       className={`relative flex h-full flex-col rounded-2xl p-7 transition-colors ${
         p.featured
-          ? "border border-indigo/50 bg-gradient-to-b from-indigo/[0.14] to-transparent shadow-[0_0_60px_-18px_rgba(104,110,218,0.65)]"
-          : "border border-hair bg-white/[0.018] hover:border-hairbright"
+          ? "border border-indigo/50 bg-surface-1 bg-gradient-to-b from-indigo/[0.14] to-transparent shadow-[0_0_60px_-18px_rgba(104,110,218,0.65)]"
+          : "border border-hair bg-surface-1 hover:border-hairbright"
       }`}
     >
       {p.featured && (

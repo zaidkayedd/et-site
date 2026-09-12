@@ -155,7 +155,7 @@ export function EcosystemPipeline() {
       </div>
 
       {/* Detail Panel */}
-      <div className="mt-4 overflow-hidden rounded-2xl border border-hair bg-surface-1/50 md:mt-8">
+      <div className="mt-4 overflow-hidden rounded-2xl border border-hair bg-surface-1 md:mt-8">
         <motion.div
           key={currentActive}
           initial={{ opacity: 0, y: 10 }}

@@ -29,7 +29,7 @@ export default function Home() {
         <LogoStrip />
         {/* Ambient signal-line animation behind everything EXCEPT the hero */}
         <div className="relative">
-          <SignalLines />
+          <SignalLines  className="-z-10"/>
           <div className="relative z-10">
             <Ecosystem />
             <Features />

@@ -49,7 +49,7 @@ export function AgentPrivacy() {
         {/* Bento Grid Layout */}
         <div className="mt-12 grid gap-6 lg:grid-cols-12 lg:items-stretch">
           {/* LEFT: Live Endpoint Telemetry Widget (7 cols) */}
-          <Reveal className="lg:col-span-7 flex flex-col justify-between rounded-3xl border border-hair bg-surface-1/60 p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden group">
+          <Reveal className="lg:col-span-7 flex flex-col justify-between rounded-3xl border border-hair bg-surface-1 p-6 sm:p-8 backdrop-blur-xl relative overflow-hidden group">
             {/* Ambient Background Glow */}
             <div className="pointer-events-none absolute -right-12 -top-12 h-64 w-64 rounded-full bg-indigo/10 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -123,7 +123,7 @@ export function AgentPrivacy() {
 
           {/* RIGHT: Modern Privacy Matrix Card (5 cols) */}
           <Reveal
-            className="lg:col-span-5 flex flex-col justify-between rounded-3xl border border-hair bg-surface-1/60 p-6 sm:p-8 backdrop-blur-xl"
+            className="lg:col-span-5 flex flex-col justify-between rounded-3xl border border-hair bg-surface-1 p-6 sm:p-8 backdrop-blur-xl"
             delay={0.15}
           >
             <div>
